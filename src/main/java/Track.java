@@ -3,14 +3,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Track {
+    private static int trackCount = 0; // Статическое поле
     private String name;
     private String genre;
     private int duration;
 
+    // При создании нового трека увеличиваем значение статического поля
     public Track() {
         this.name = "";
         this.genre = "";
         this.duration = 0;
+        trackCount++;
 
     }
 
@@ -18,12 +21,19 @@ public class Track {
         this.name = name;
         this.genre = "";
         this.duration = 0;
+        trackCount++;
     }
 
     public Track(String name, String genre, int duration) {
         this.name = name;
         this.genre = genre;
         this.duration = duration;
+        trackCount++;
+    }
+
+    // Статический метод для получения количества треков
+    public static int getTrackCount() {
+        return trackCount;
     }
 
     public String getName() {
