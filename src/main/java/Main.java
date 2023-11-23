@@ -12,7 +12,7 @@ public class Main {
         tracks[3] = new Track("Track 4", "Genre 4", 270);
         tracks[4] = new Track("Track 5", "Genre 5", 280);
 
-        System.out.println("\nКоличество созданных треков: " + Track.getTrackCount());
+        System.out.println("\nКоличество созданных треков(использование статистического метода для получения значения статистической переменной): " + Track.getTrackCount());
 
         System.out.println("\nTrack array:\n");
         for (Track tr : tracks) {
@@ -20,11 +20,10 @@ public class Main {
             System.out.println("\n");
         }
 
-
         Helper helper = new Helper(new Track("Track 1", "Genre 1", 240));
         int duration = helper.getTrackDuration();
 
-        System.out.println("Duration: "+ duration);
+        System.out.println("Возвращение Duration из метода(getTrackDuration()) осуществляется через вспомогательный класс Helper,duration: "+ duration);
 
         //Примеры обработки строк
 
@@ -52,7 +51,11 @@ public class Main {
         char firstChar = name.charAt(0);
         System.out.println("\nПервый символ: " + firstChar);
 
-
+        System.out.println("\nОператор this в сеттерах\nДо:"+tracks[0].getDuration());
+        tracks[0].setDuration(-67);
+        System.out.println("\nПосле добавления отрицательной продолжительности:"+tracks[0].getDuration());
+        tracks[0].setDuration(180);
+        System.out.println("\nПосле добавления допустимой продолжительности:"+tracks[0].getDuration());
 
     }
 }

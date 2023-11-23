@@ -49,15 +49,21 @@ public class Track {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (!name.isEmpty()) {
+            this.name = name;
+        }
     }
 
     public void setGenre(String genre) {
-        this.genre = genre;
+        if(!genre.isEmpty()) {
+            this.genre = genre;
+        }
     }
 
     public void setDuration(int duration) {
-        this.duration = duration;
+        if(duration>0) {
+            this.duration = duration;
+        }
     }
 
     public static List<Track> findTracksByGenre(List<Track> tracks, String genre) {
