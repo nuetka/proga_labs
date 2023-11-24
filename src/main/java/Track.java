@@ -28,6 +28,7 @@ public class Track {
     public Track(String name, String genre, int duration) {
         this.name = name;
         this.genre = genre;
+        trackCount++;
         try {
             if (duration <= 0) {
                 throw new IllegalArgumentException("Duration should be a positive integer.");
