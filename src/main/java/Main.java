@@ -1,30 +1,17 @@
 public class Main {
     public static void main(String[] args) {
-        Track track1;
-        track1 = null;
         System.out.println("Обработка исключения при инициализации объекта:");
-        try {
-            track1 = new Track("Song1", "Pop", -3); // отрицательная продолжительность
-        } catch (IllegalArgumentException e) {
-            System.out.println("Exception caught: " + e.getMessage());
-        }
+
+        Track track1 = new Track("Song1", "Pop", -3); // отрицательная продолжительность
+
         System.out.println("После ввода отрицательной продолжительности она устанавливается в 0:");
 
-       try {
-           if (track1==null) {
-               throw new NullPointerException();
-           }
-           track1.printToConsole();
-       }catch(NullPointerException ignored){
-       }
+        track1.printToConsole();
 
         System.out.println("Обработка исключения при использовании сеттера:");
         Album album = new Album();
-        try {
-            album.setYear(-2022);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Exception caught: " + e.getMessage());
-        }
+
+        album.setYear(-2022);
 
         Track[] trackArray = new Track[2];
         Playlist[][] playlistArray = new Playlist[2][2];
