@@ -1,61 +1,60 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
+        Track track1;
+        track1 = null;
+        System.out.println("Обработка исключения при инициализации объекта:");
+        try {
+            track1 = new Track("Song1", "Pop", -3); // отрицательная продолжительность
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+        System.out.println("После ввода отрицательной продолжительности она устанавливается в 0:");
 
-        Track[] tracks = new Track[5];
-        tracks[0] = new Track("Track 1", "Genre 1", 240);
-        tracks[1] = new Track("Track 2", "Genre 2", 250);
-        tracks[2] = new Track("Track 3", "Genre 3", 260);
-        tracks[3] = new Track("Track 4", "Genre 4", 270);
-        tracks[4] = new Track("Track 5", "Genre 5", 280);
+       try {
+           if (track1==null) {
+               throw new NullPointerException();
+           }
+           track1.printToConsole();
+       }catch(NullPointerException ignored){
+       }
 
-        System.out.println("\nКоличество созданных треков(использование статистического метода для получения значения статистической переменной): " + Track.getTrackCount());
-
-        System.out.println("\nTrack array:\n");
-        for (Track tr : tracks) {
-            tr.printToConsole();
-            System.out.println("\n");
+        System.out.println("Обработка исключения при использовании сеттера:");
+        Album album = new Album();
+        try {
+            album.setYear(-2022);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception caught: " + e.getMessage());
         }
 
-        Helper helper = new Helper(new Track("Track 1", "Genre 1", 240));
-        int duration = helper.getTrackDuration();
+        Track[] trackArray = new Track[2];
+        Playlist[][] playlistArray = new Playlist[2][2];
 
-        System.out.println("Возвращение Duration из метода(getTrackDuration()) осуществляется через вспомогательный класс Helper,duration: "+ duration);
+        System.out.println("\nодномерный массив треков:\n");
+        for (int i = 0; i < trackArray.length; i++) {
+            trackArray[i] = new Track();
+            trackArray[i].readFromConsole();
+        }
 
-        //Примеры обработки строк
+        System.out.println("\nСозданный одномерный массив треков:\n");
+        for (Track track : trackArray) {
+            track.printToConsole();
+        }
 
-        String name = "My Track";
-        System.out.println("\nИсходная строка: " + name);
-
-        // Преобразование строки в верхний регистр
-        String upperCaseName = name.toUpperCase();
-
-        System.out.println("\nСтрока в верхнем регистре: " + upperCaseName);
-
-        //Проверка наличия подстроки
-        boolean containsJava = name.contains("Track");
-        System.out.println("\nСодержит 'Track': " + containsJava);
-
-        //использование substring()
-        String subString = name.substring(0, 4);
-        System.out.println("\nПодстрока: " + subString);
-
-        //Замена символов
-        String replaced = name.replace(' ', '!');
-        System.out.println("\nЗамененная строка: " + replaced);
-
-        //Использование метода chatAt()
-        char firstChar = name.charAt(0);
-        System.out.println("\nПервый символ: " + firstChar);
-
-        System.out.println("\nОператор this в сеттерах\nДо:"+tracks[0].getDuration());
-        tracks[0].setDuration(-67);
-        System.out.println("\nПосле добавления отрицательной продолжительности:"+tracks[0].getDuration());
-        tracks[0].setDuration(180);
-        System.out.println("\nПосле добавления допустимой продолжительности:"+tracks[0].getDuration());
-
+        System.out.println("\nдвумерный массив плейлистов\n");
+        for (int i = 0; i < playlistArray.length; i++) {
+            for (int j = 0; j < playlistArray[i].length; j++) {
+                playlistArray[i][j] = new Playlist();
+                playlistArray[i][j].readFromConsole();
+            }
+        }
+        System.out.println("\nСозданный двумерный массив плейлистов:\n");
+        for (int i = 0; i < playlistArray[0].length; i++) {
+            for (int j = 0; j < playlistArray.length; j++) {
+                playlistArray[i][j].printToConsole();
+            }
+            System.out.println();
+        }
     }
+
+
 }

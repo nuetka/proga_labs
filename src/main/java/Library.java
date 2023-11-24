@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,9 +45,20 @@ class Library {
     public void readFromConsole() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter the number of albums: ");
-        int numAlbums = scanner.nextInt();
-        scanner.nextLine();
+        int numAlbums=0;
+
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print("Enter albums count: ");
+                numAlbums = scanner.nextInt();
+                scanner.nextLine(); // символ новой строки
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // очистка неверного ввода
+            }
+        }
 
         for (int i = 0; i < numAlbums; i++) {
             Album album = new Album();
@@ -54,9 +66,20 @@ class Library {
             albums.add(album);
         }
 
-        System.out.print("Enter the number of playlists: ");
-        int numPlaylists = scanner.nextInt();
-        scanner.nextLine();
+        int numPlaylists=0;
+
+        boolean validInput1 = false;
+        while (!validInput1) {
+            try {
+                System.out.print("Enter playlists count: ");
+                numPlaylists = scanner.nextInt();
+                scanner.nextLine(); // символ новой строки
+                validInput1 = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // очистка неверного ввода
+            }
+        }
 
         for (int i = 0; i < numPlaylists; i++) {
             Playlist playlist = new Playlist();

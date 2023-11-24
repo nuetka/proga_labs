@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,8 +18,16 @@ public class Album {
 
     public Album(String name, int year, String artist, List<Track> tracks) {
         this.name = name;
-        this.year = year;
         this.artist = artist;
+        try {
+            if (year < 0) {
+                throw new IllegalArgumentException("Year should be a non-negative integer.");
+            }
+            this.year = year;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid year: " + e.getMessage());
+            this.year = 0;
+        }
         this.tracks = new ArrayList<>(tracks);
     }
 
@@ -50,7 +59,14 @@ public class Album {
     }
 
     public void setYear(int year) {
-        this.year = year;
+        try {
+            if (year < 0) {
+                throw new IllegalArgumentException("Year should be a non-negative integer.");
+            }
+            this.year = year;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid year input: " + e.getMessage());
+        }
     }
 
     public void setArtist(String artist) {
@@ -77,9 +93,21 @@ public class Album {
         String artist = scanner.nextLine();
         setArtist(artist);
 
-        System.out.print("Enter track count: ");
-        int trackCount = scanner.nextInt();
-        scanner.nextLine();
+
+        int trackCount=0;
+
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print("Enter track count: ");
+                trackCount = scanner.nextInt();
+                scanner.nextLine(); // символ новой строки
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // очистка неверного ввода
+            }
+        }
 
         List<Track> tracks = new ArrayList<>();
         for (int i = 0; i < trackCount; i++) {

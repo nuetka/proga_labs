@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,9 +45,20 @@ public class Playlist {
         String name1 = scanner.nextLine();
         setName(name1);
 
-        System.out.print("Enter track count: ");
-        int trackCount = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        int trackCount=0;
+
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print("Enter track count: ");
+                trackCount = scanner.nextInt();
+                scanner.nextLine(); // символ новой строки
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // очистка неверного ввода
+            }
+        }
 
         List<Track> tracks = new ArrayList<>();
         for (int i = 0; i < trackCount; i++) {
@@ -67,10 +79,10 @@ public class Playlist {
     }
 
     public void printToConsole() {
-        System.out.println("Playlist: " + name);
-        System.out.println("Tracks:");
+        System.out.print("   Playlist: " + name);
+        System.out.print("/Tracks:");
         for (Track track : tracks) {
-            System.out.println(track.getName());
+            System.out.print(track.getName());
         }
     }
 }

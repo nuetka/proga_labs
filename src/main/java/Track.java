@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,8 +28,15 @@ public class Track {
     public Track(String name, String genre, int duration) {
         this.name = name;
         this.genre = genre;
-        this.duration = duration;
-        trackCount++;
+        try {
+            if (duration <= 0) {
+                throw new IllegalArgumentException("Duration should be a positive integer.");
+            }
+            this.duration = duration;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid duration: " + e.getMessage());
+            this.duration = 0;
+        }
     }
 
     // Статический метод для получения количества треков
@@ -61,8 +69,13 @@ public class Track {
     }
 
     public void setDuration(int duration) {
-        if(duration>0) {
+        try {
+            if (duration <= 0) {
+                throw new IllegalArgumentException("Duration should be a positive integer.");
+            }
             this.duration = duration;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid duration input: " + e.getMessage());
         }
     }
 
@@ -84,8 +97,18 @@ public class Track {
         System.out.print("Enter track genre: ");
         this.genre = scanner.nextLine();
 
-        System.out.print("Enter track duration (in seconds): ");
-        this.duration = scanner.nextInt();
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print("Enter track duration (in seconds): ");
+                int inputDuration = scanner.nextInt();
+                setDuration(inputDuration);
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // очистка неправильного ввода
+            }
+        }
     }
 
     public void printToConsole() {

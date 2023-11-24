@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,8 +45,21 @@ public class Artist {
         name = scanner.nextLine();
 
         System.out.print("Enter the number of albums: ");
-        int numAlbums = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+
+        int numAlbums=0;
+
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print("Enter albums count: ");
+                numAlbums = scanner.nextInt();
+                scanner.nextLine(); // символ новой строки
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // очистка неверного ввода
+            }
+        }
 
         for (int i = 0; i < numAlbums; i++) {
             Album album = new Album();
