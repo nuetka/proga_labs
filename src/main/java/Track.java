@@ -92,23 +92,13 @@ public class Track {
     public void readFromConsole() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter track name: ");
-        this.name = scanner.nextLine();
+        setName(scanner.nextLine());
 
         System.out.print("Enter track genre: ");
-        this.genre = scanner.nextLine();
+        setGenre(scanner.nextLine());
 
-        boolean validInput = false;
-        while (!validInput) {
-            try {
-                System.out.print("Enter track duration (in seconds): ");
-                int inputDuration = scanner.nextInt();
-                setDuration(inputDuration);
-                validInput = true;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.nextLine(); // очистка неправильного ввода
-            }
-        }
+        System.out.print("Enter track duration (in seconds): ");
+        setDuration(Integer.parseInt(scanner.nextLine()));
     }
 
     public void printToConsole() {
