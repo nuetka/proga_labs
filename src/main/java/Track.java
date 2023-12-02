@@ -3,11 +3,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Track {
+public class Track extends MediaItem implements ChangeVolume {
     private static int trackCount = 0; // Статическое поле
-    private String name;
-    private String genre;
-    private int duration;
+    protected String genre;
 
     // При создании нового трека увеличиваем значение статического поля
     public Track() {
@@ -45,17 +43,11 @@ public class Track {
         return trackCount;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public String getGenre() {
         return genre;
     }
 
-    public int getDuration() {
-        return duration;
-    }
 
     public void setName(String name) {
         if (!name.isEmpty()) {
@@ -108,4 +100,13 @@ public class Track {
         System.out.println("Duration: " + duration + " seconds");
     }
 
+    @Override
+    public void play() {
+        System.out.println("Playing track: " + name );
+    }
+
+    @Override
+    public void volumeUp() {
+        System.out.println("Увеличена громкость у трека: " + name );
+    }
 }

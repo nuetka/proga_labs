@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Playlist {
+public class Playlist implements ChangeVolume {
     private String name;
     private List<Track> tracks;
 
@@ -84,6 +84,11 @@ public class Playlist {
         for (Track track : tracks) {
             System.out.print(track.getName());
         }
+    }
+
+    @Override
+    public void volumeUp() {
+        System.out.println("Уаеличена громакость у плейлиста " + name );
     }
 }
 

@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Album {
+public class Album implements Cloneable {
     private String name;
     private int year;
     private String artist;
@@ -153,5 +153,15 @@ public class Album {
             }
         }
         return result;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Album clonedAlbum = (Album) super.clone();
+        clonedAlbum.tracks = new ArrayList<>();
+        for (Track track : this.tracks) {
+            clonedAlbum.tracks.add(new Track(track.getName(), track.getGenre(), track.getDuration()));
+        }
+        return clonedAlbum;
     }
 }

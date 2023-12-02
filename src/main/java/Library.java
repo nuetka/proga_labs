@@ -4,22 +4,20 @@ import java.util.List;
 import java.util.Scanner;
 
 class Library {
+    private static Library instance;
     private List<Album> albums;
     private List<Playlist> playlists;
 
-    public Library() {
+    private Library() {
         albums = new ArrayList<>();
         playlists = new ArrayList<>();
     }
 
-    public Library(List<Album> albums, List<Playlist> playlists) {
-        this.albums = albums;
-        this.playlists = playlists;
-    }
-
-    public Library(List<Album> albums) {
-        this.albums = albums;
-        playlists = new ArrayList<>();
+    public static Library getInstance() {
+        if (instance == null) {
+            instance = new Library();
+        }
+        return instance;
     }
 
     public List<Album> getAlbums() {
@@ -40,6 +38,9 @@ class Library {
 
     public void addAlbum(Album album) {
         albums.add(album);
+    }
+    public void addPlaylist(Playlist playlist) {
+        playlists.add(playlist);
     }
 
     public void readFromConsole() {
